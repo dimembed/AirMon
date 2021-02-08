@@ -21,6 +21,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "app_touchgfx.h"
+#include "app_sensapi.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -67,6 +68,16 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
   .stack_size = 4096 * 4
 };
+
+/* Definitions for SensApiTask */
+osThreadId_t SensApiTaskHandle;
+const osThreadAttr_t SensApiTask_attributes = {
+  .name = "SensApiTask",
+  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 4096 * 4
+};
+
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -82,6 +93,7 @@ static void MX_LTDC_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_I2C1_Init(void);
 void TouchGFX_Task(void *argument);
+void SensApi_Task(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -154,6 +166,9 @@ int main(void)
   /* Create the thread(s) */
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
+
+  /* creation of SensApiTask */
+  SensApiTaskHandle = osThreadNew(SensApi_Task, NULL, &SensApiTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -720,6 +735,24 @@ static void MX_GPIO_Init(void)
   */
 /* USER CODE END Header_TouchGFX_Task */
 __weak void TouchGFX_Task(void *argument)
+{
+  /* USER CODE BEGIN 5 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_SensApi_Task */
+/**
+  * @brief  Function implementing the SensApiTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_SensApi_Task */
+__weak void SensApi_Task(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
