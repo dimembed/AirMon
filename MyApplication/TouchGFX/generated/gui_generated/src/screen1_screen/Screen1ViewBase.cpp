@@ -4,8 +4,10 @@
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include "BitmapDatabase.hpp"
+#include <texts/TextKeysAndLanguages.hpp>
 
-Screen1ViewBase::Screen1ViewBase()
+Screen1ViewBase::Screen1ViewBase() :
+    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
 {
 
     __background.setPosition(0, 0, 800, 480);
@@ -14,11 +16,48 @@ Screen1ViewBase::Screen1ViewBase()
     image1.setXY(0, 0);
     image1.setBitmap(touchgfx::Bitmap(BITMAP_BLUE_BACKGROUNDS_MAIN_BG_TEXTURE_800X480PX_ID));
 
+    button_to_scr2.setXY(44, 365);
+    button_to_scr2.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    button_to_scr2.setAction(buttonCallback);
+
+    button_to_scr3.setXY(588, 365);
+    button_to_scr3.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    button_to_scr3.setAction(buttonCallback);
+
+    textArea1.setXY(247, 185);
+    textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    textArea1.setLinespacing(0);
+    Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%s", touchgfx::TypedText(T_SINGLEUSEID1).getText());
+    textArea1.setWildcard(textArea1Buffer);
+    textArea1.resizeToCurrentText();
+    textArea1.setTypedText(touchgfx::TypedText(T_RESOURCEID1));
+
     add(__background);
     add(image1);
+    add(button_to_scr2);
+    add(button_to_scr3);
+    add(textArea1);
 }
 
 void Screen1ViewBase::setupScreen()
 {
 
+}
+
+void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &button_to_scr2)
+    {
+        //Interaction1
+        //When button_to_scr2 clicked change screen to Screen2
+        //Go to Screen2 with screen transition towards West
+        application().gotoScreen2ScreenSlideTransitionWest();
+    }
+    else if (&src == &button_to_scr3)
+    {
+        //Interaction2
+        //When button_to_scr3 clicked change screen to Screen3
+        //Go to Screen3 with screen transition towards East
+        application().gotoScreen3ScreenSlideTransitionEast();
+    }
 }

@@ -23,6 +23,8 @@
 #include "app_touchgfx.h"
 #include "app_sensapi.h"
 
+
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../Components/otm8009a/otm8009a.h"
@@ -44,6 +46,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
+
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -61,22 +64,25 @@ QSPI_HandleTypeDef hqspi;
 
 SDRAM_HandleTypeDef hsdram1;
 
+UART_HandleTypeDef huart6;
+
 /* Definitions for TouchGFXTask */
 osThreadId_t TouchGFXTaskHandle;
 const osThreadAttr_t TouchGFXTask_attributes = {
   .name = "TouchGFXTask",
-  .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 4096 * 4
+  .priority = (osPriority_t) osPriorityRealtime,
+  .stack_size = 1024 * 4
 };
 
 /* Definitions for SensApiTask */
 osThreadId_t SensApiTaskHandle;
 const osThreadAttr_t SensApiTask_attributes = {
   .name = "SensApiTask",
-  .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 4096 * 4
+  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 256 * 4
 };
 
+osMessageQueueId_t scd30_MsgQueue;
 
 /* USER CODE BEGIN PV */
 
@@ -92,6 +98,8 @@ static void MX_FMC_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_USART6_UART_Init(void);
+
 void TouchGFX_Task(void *argument);
 void SensApi_Task(void *argument);
 
@@ -101,7 +109,13 @@ void SensApi_Task(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int prnt(int ch)
+{
+	 uint8_t c[1];
+	 c[0] = ch & 0x00FF;
+	 HAL_UART_Transmit(&huart6, (uint8_t *)&c, 1, 0xFFFF);
+	 return ch;
+}
 /* USER CODE END 0 */
 
 /**
@@ -139,9 +153,17 @@ int main(void)
   MX_LTDC_Init();
   MX_QUADSPI_Init();
   MX_I2C1_Init();
+  MX_USART6_UART_Init();
+
+  printf("\n\r Lets get started!\n\r");
+
   MX_TouchGFX_Init();
+
   /* USER CODE BEGIN 2 */
 
+  //sps30_wake_up();
+
+  SensInit();
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -162,6 +184,10 @@ int main(void)
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
+  scd30_MsgQueue = osMessageQueueNew(1, sizeof(SCD30MSG), NULL);
+  if (scd30_MsgQueue == NULL) {
+    ; // Message Queue object not created, handle failure
+  }
 
   /* Create the thread(s) */
   /* creation of TouchGFXTask */
@@ -445,7 +471,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 400000;
+  hi2c1.Init.ClockSpeed = 100000;//400000
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -457,8 +483,9 @@ static void MX_I2C1_Init(void)
   {
     Error_Handler();
   }
+
   /* USER CODE BEGIN I2C1_Init 2 */
-  HAL_I2C_DeInit(&hi2c1);
+  //HAL_I2C_DeInit(&hi2c1);
   /* USER CODE END I2C1_Init 2 */
 
 }
@@ -722,6 +749,85 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
 }
+
+void SensInit(void)
+{
+    int16_t interval_in_seconds = 2;
+    uint8_t auto_clean_days = 0;
+    uint8_t ret;
+
+	  while (sps30_probe() != 0) {
+	      printf("SPS probing failed\n");
+	      //printTerm(tmsg, "SPS probing failed\n");
+	      HAL_Delay(1000);
+	  }
+
+	  printf("SPS probing success\n");
+	  //printTerm(tmsg, "SPS probing success\n");
+
+	  ret = sps30_set_fan_auto_cleaning_interval_days(auto_clean_days);
+	  HAL_Delay(20);
+	  ret = sps30_start_measurement();
+	  HAL_Delay(20);
+
+
+	  while (scd30_probe() != STATUS_OK) {
+	      printf("SCD3 probing failed\n");
+	      //printTerm(tmsg, "SCD probing failed\n");
+	      HAL_Delay(1000);
+	  }
+	  printf("SCD probing success\n");
+	  //printTerm(tmsg, "SCD probing success\n");
+
+	  scd30_set_measurement_interval(interval_in_seconds);
+	  HAL_Delay(20);
+	  scd30_set_temperature_offset(400);
+	  HAL_Delay(20);
+	  scd30_start_periodic_measurement(0);
+
+	  HAL_Delay(2000);
+
+
+	  iAQ_Core_init();
+
+
+	  rtc_init();
+
+}
+
+/**
+  * @brief USART6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART6_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART6_Init 0 */
+
+  /* USER CODE END USART6_Init 0 */
+
+  /* USER CODE BEGIN USART6_Init 1 */
+
+  /* USER CODE END USART6_Init 1 */
+  huart6.Instance = USART6;
+  huart6.Init.BaudRate = 115200;
+  huart6.Init.WordLength = UART_WORDLENGTH_8B;
+  huart6.Init.StopBits = UART_STOPBITS_1;
+  huart6.Init.Parity = UART_PARITY_NONE;
+  huart6.Init.Mode = UART_MODE_TX_RX;
+  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART6_Init 2 */
+
+  /* USER CODE END USART6_Init 2 */
+
+}
+
 
 /* USER CODE BEGIN 4 */
 

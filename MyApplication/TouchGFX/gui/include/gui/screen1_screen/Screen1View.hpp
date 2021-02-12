@@ -11,6 +11,10 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    void setDataScdUi(SCD30MSG scd_msr);
+
+
 protected:
 };
 

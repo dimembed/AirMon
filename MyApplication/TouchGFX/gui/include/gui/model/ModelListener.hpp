@@ -10,6 +10,8 @@ public:
     
     virtual ~ModelListener() {}
 
+    virtual void dataChangedScd() {};
+
     void bind(Model* m)
     {
         model = m;

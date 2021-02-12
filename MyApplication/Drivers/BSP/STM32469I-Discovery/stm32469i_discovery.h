@@ -255,7 +255,7 @@ typedef enum
   * It can be used in parallel by other modules.
   */
 #ifndef I2C1_SCL_FREQ_KHZ
-#define I2C1_SCL_FREQ_KHZ                  400000 /*!< f(I2C_SCL) = 400 kHz */
+#define I2C1_SCL_FREQ_KHZ                  100000 /*!< f(I2C_SCL) = 400 kHz */
 #endif /* I2C1_SCL_FREQ_KHZ */
 
 /**

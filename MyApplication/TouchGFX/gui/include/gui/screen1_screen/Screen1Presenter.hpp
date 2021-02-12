@@ -27,6 +27,8 @@ public:
 
     virtual ~Screen1Presenter() {};
 
+    virtual void dataChangedScd();
+
 private:
     Screen1Presenter();
 

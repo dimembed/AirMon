@@ -40,16 +40,25 @@ build/MINGW32_NT-6.2/generated/gui_generated/src/common/FrontendApplicationBase.
  gui/include/gui/model/Model.hpp gui/include/gui/common/FrontendHeap.hpp \
  generated/gui_generated/include/gui_generated/common/FrontendHeapBase.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/NoTransition.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp \
  gui/include/gui/common/FrontendApplication.hpp \
  gui/include/gui/screen1_screen/Screen1View.hpp \
  generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp \
  gui/include/gui/screen1_screen/Screen1Presenter.hpp \
  gui/include/gui/model/ModelListener.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
+ gui/include/gui/screen2_screen/Screen2View.hpp \
+ generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp \
+ gui/include/gui/screen2_screen/Screen2Presenter.hpp \
+ gui/include/gui/screen3_screen/Screen3View.hpp \
+ generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp \
+ gui/include/gui/screen3_screen/Screen3Presenter.hpp \
  generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/Texts.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp
@@ -136,6 +145,14 @@ generated/gui_generated/include/gui_generated/common/FrontendHeapBase.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/NoTransition.hpp:
 
+../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:
+
 gui/include/gui/common/FrontendApplication.hpp:
 
 gui/include/gui/screen1_screen/Screen1View.hpp:
@@ -148,13 +165,23 @@ gui/include/gui/model/ModelListener.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp:
 
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:
-
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp:
+
+gui/include/gui/screen2_screen/Screen2View.hpp:
+
+generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp:
+
+gui/include/gui/screen2_screen/Screen2Presenter.hpp:
+
+gui/include/gui/screen3_screen/Screen3View.hpp:
+
+generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp:
+
+gui/include/gui/screen3_screen/Screen3Presenter.hpp:
 
 generated/texts/include/texts/TextKeysAndLanguages.hpp:
 

@@ -708,11 +708,15 @@ static HAL_StatusTypeDef I2C1_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
   */
 static void I2C1_Error(uint8_t Addr)
 {
-  /* De-initialize the I2C comunication bus */
-  HAL_I2C_DeInit(&heval_I2c1);
 
-  /* Re-Initiaize the I2C comunication bus */
-  I2C1_Init();
+
+//  /* De-initialize the I2C comunication bus */
+//  HAL_I2C_DeInit(&heval_I2c1);
+//
+//  /* Re-Initiaize the I2C comunication bus */
+//  I2C1_Init();
+
+
 }
 
 static void I2C2_Error(uint8_t Addr)

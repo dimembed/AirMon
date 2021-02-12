@@ -58,23 +58,32 @@ build/MINGW32_NT-6.2/generated/simulator/src/mainBase.o: \
  ../Middlewares/ST/touchgfx/framework/include/mvp/MVPHeap.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/NoTransition.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/Transition.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp \
  gui/include/gui/common/FrontendApplication.hpp \
  generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp \
  gui/include/gui/model/Model.hpp \
  gui/include/gui/screen1_screen/Screen1View.hpp \
  generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp \
  gui/include/gui/screen1_screen/Screen1Presenter.hpp \
  gui/include/gui/model/ModelListener.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
+ gui/include/gui/screen2_screen/Screen2View.hpp \
+ generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp \
+ gui/include/gui/screen2_screen/Screen2Presenter.hpp \
+ gui/include/gui/screen3_screen/Screen3View.hpp \
+ generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp \
+ gui/include/gui/screen3_screen/Screen3Presenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp
 
 generated/simulator/include/simulator/mainBase.hpp:
@@ -193,6 +202,16 @@ generated/gui_generated/include/gui_generated/common/FrontendHeapBase.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/Transition.hpp:
 
+../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:
+
 gui/include/gui/common/FrontendApplication.hpp:
 
 generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
@@ -204,8 +223,6 @@ generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp
 ../Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:
-
-../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp:
 
 gui/include/gui/model/Model.hpp:
 
@@ -219,12 +236,22 @@ gui/include/gui/model/ModelListener.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp:
 
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:
-
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp:
+
+gui/include/gui/screen2_screen/Screen2View.hpp:
+
+generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp:
+
+gui/include/gui/screen2_screen/Screen2Presenter.hpp:
+
+gui/include/gui/screen3_screen/Screen3View.hpp:
+
+generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp:
+
+gui/include/gui/screen3_screen/Screen3Presenter.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp:
